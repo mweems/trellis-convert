@@ -1,13 +1,7 @@
-from .constants import ONES, TENS
+from .constants import ONES, TENS, TEENS, LEVELS
 
 def numConverter(number):
-    ones = ("", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
-    tens = ("", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
-    teens = ("ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen")
-    levels = ("", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion")
-
     word = ""
-    #number will now be the reverse of the string form of itself.
     num = reversed(str(number))
     number = ""
     for x in num:
@@ -17,21 +11,28 @@ def numConverter(number):
     x = 0
     for digit in number:
         if x % 3 == 0:
-            word = levels[x / 3] + ", " + word
+            word = LEVELS[int(x / 3)] + ", " + word
             n = int(digit)
         elif x % 3 == 1:
             if digit == "1":
-                num = teens[n]
+                num = TEENS[n]
             else:
-                num = tens[int(digit)]
+                num = TENS[int(digit)]
                 if n:
                     if num:
-                        num += "-" + ones[n]
+                        num += "-" + ONES[n]
                     else:
-                        num = ones[n]
+                        num = ONES[n]
             word = num + " " + word
         elif x % 3 == 2:
             if digit != "0":
-                word = ones[int(digit)] + " hundred " + word
+                word = ONES[int(digit)] + " hundred " + word
         x += 1
     return word.strip(", ")
+
+def validateNum(num):
+    try:
+        number = int(num)
+    except:
+        return False
+    return True
