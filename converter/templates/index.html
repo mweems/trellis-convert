@@ -1,0 +1,12 @@
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Submit</button>
+</form>
+{% if response.status %}
+<div>
+    {{response.input}}
+    <br />
+    {{response.value}}
+</div>
+{% endif %}
