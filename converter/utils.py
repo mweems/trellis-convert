@@ -1,13 +1,14 @@
 from .constants import ONES, TENS, TEENS, LEVELS
 
-def numConverter(number):
+def numConverter(num):
     word = ""
-    num = reversed(str(number))
+    sNum = reversed(str(num))
     number = ""
-    for x in num:
+    for x in sNum:
         number += x
-    del num
+    del sNum
     if len(number) % 3 == 1: number += "0"
+    print(number)
     x = 0
     for digit in number:
         if x % 3 == 0:

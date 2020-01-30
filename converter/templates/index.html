@@ -3,8 +3,8 @@
     {{ form }}
     <button type="submit">Submit</button>
 </form>
-{% if response.status %}
+{% if response.status == 'ok' %}
 <div>
-    {{response.value}}
+    {{response.num_in_english}}
 </div>
 {% endif %}
