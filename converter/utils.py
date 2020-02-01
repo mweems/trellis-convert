@@ -1,33 +1,29 @@
 from .constants import ONES, TENS, TEENS, LEVELS
 
 def numConverter(num):
-    word = ""
-    sNum = reversed(str(num))
-    number = ""
-    for x in sNum:
-        number += x
-    del sNum
-    if len(number) % 3 == 1: number += "0"
-    print(number)
+    word = ''
+    list = [int(x) for x in str(num)]
+    r_list = list[::-1]
+    if len(r_list) % 3 == 1: r_list.append(0)
     x = 0
-    for digit in number:
+    for digit in r_list:
         if x % 3 == 0:
             word = LEVELS[int(x / 3)] + ", " + word
-            n = int(digit)
+            ones = digit
         elif x % 3 == 1:
-            if digit == "1":
-                num = TEENS[n]
+            if digit == 1:
+                num = TEENS[ones]
             else:
-                num = TENS[int(digit)]
-                if n:
+                num = TENS[digit]
+                if ones:
                     if num:
-                        num += "-" + ONES[n]
+                        num += "-" + ONES[ones]
                     else:
-                        num = ONES[n]
+                        num = ONES[ones]
             word = num + " " + word
         elif x % 3 == 2:
-            if digit != "0":
-                word = ONES[int(digit)] + " hundred " + word
+            if digit != 0:
+                word = ONES[digit] + " hundred " + word
         x += 1
     return word.strip(", ")
 

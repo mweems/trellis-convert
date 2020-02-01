@@ -1,35 +1,16 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 from .utils import numConverter, validateNum
-from .forms import NumForm
 
-def index(request):
-    form = NumForm()
-    response = {}
-    if request.method == 'POST':
-        form = NumForm(request.POST)
-        print(form.errors)
-        if form.is_valid():
-            response = {
-                'status': 'ok',
-                'num_in_english': numConverter(form['num'].value())
-            }
-        else:
-            response = {
-                'status': 'invalid',
-                'num_in_english': Null
-            }
-            form = form
-    return render(request, 'index.html', {'form': form, 'response': response})
-
-def convert(request, num):
-    if validateNum(num):
+def convert(request, number):
+    if validateNum(number):
         response = {
             'status': 'ok',
-            'num_in_english': numConverter(int(num))
+            'num_in_english': numConverter(int(number))
         }
     else:
         response = {
             'status': 'invalid',
-            'num_in_english': 'url must contain a number'
+            'num_in_english': 'url must be a number'
         }
-    return render(request, 'convert.html', {'response': response})
+    
+    return JsonResponse(response)
