@@ -6,6 +6,8 @@ Uses Python3
 
 Start a virtual environment 
 
+Inside the virtual environment
+
 Clone the repo 
 
 $ cd trellis-convert 
